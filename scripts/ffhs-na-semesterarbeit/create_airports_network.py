@@ -1,7 +1,9 @@
-import csv
 import json
 from typing import Dict, List, Tuple, Iterable, Iterator
+from datetime import datetime
+from dateutil.tz import gettz
 import networkx as nx
+
 
 CSV_AIRPORT_HEADERS = (
 'id', 'ident', 'type', 'name', 'latitude_deg', 'longitude_deg', 'elevation_ft', 'continent', 'iso_country', 'iso_region', 'municipality', 'scheduled_service',
@@ -23,7 +25,7 @@ REMOVE_NODE_NAME_PATTERNS = (
     'Rail.'
 )
 
-airport_network = nx.DiGraph()
+airport_network = nx.MultiDiGraph()
 
 
 def load_airports() -> Tuple[Iterable, Dict, Dict]:
@@ -102,7 +104,7 @@ def load_routes():
     Load routes
     :return:
     """
-    with open('../../data/Routes_20181009.json', 'r', encoding='utf-8') as af:
+    with open('../../data/Routes_20181109.json', 'r', encoding='utf-8') as af:
         routes = json.loads(''.join(af.readlines()))
 
     return routes
@@ -119,6 +121,8 @@ for airport_data in airports:
 
 num_routes = 0
 orphaned_routes = []
+unisolated_airports = []
+
 for route in load_routes():
     from_ap_icao = route.get('departureIcao', None)
     from_ap_iata = route.get('departureIata', None)
@@ -147,14 +151,35 @@ for route in load_routes():
         orphaned_routes.append(route)
         continue
 
+    if from_ap_obj not in unisolated_airports:
+        unisolated_airports.append(from_ap_obj)
+    if to_ap_obj not in unisolated_airports:
+        unisolated_airports.append(to_ap_obj)
+
+    local_dep_time_str = route.get('departureTime')
+    local_arr_time_str = route.get('arrivalTime')
+
+    utc_dep_time = datetime.strptime(local_dep_time_str, '%H:%M:%S').replace(tzinfo=gettz(from_ap_obj.get('timezone'))).astimezone() if local_dep_time_str else None
+    utc_arr_time = datetime.strptime(local_arr_time_str, '%H:%M:%S').replace(tzinfo=gettz(to_ap_obj.get('timezone'))).astimezone() if local_arr_time_str else None
+
+    route['duration'] = abs((utc_arr_time - utc_dep_time).total_seconds()) if local_dep_time_str and local_arr_time_str else 0
+
+    route['departureTimeUTC'] = utc_dep_time.strftime('%H:%M:%S') if local_dep_time_str else None
+    route['arrivalTimeUTC'] = utc_arr_time.strftime('%H:%M:%S') if local_arr_time_str else None
+
     for data_param, data in route.items():
         if data is None:
             route[data_param] = ''
         if isinstance(data, List):
             route[data_param] = ', '.join(data)
-    airport_network.add_edge(from_ap_obj.get('airportId'), to_ap_obj.get('airportId'), **route)
+    airport_network.add_edge(from_ap_obj.get('airportId'), to_ap_obj.get('airportId'), weight=route['duration'] or 1, **route)
 
-    num_routes+=1
+    num_routes += 1
+
+# nodes = [n for n in airport_network.nodes()]
+# for node in nodes:
+#     if node not in unisolated_airports:
+#         airport_network.remove_node(node)
 
 print(orphaned_routes[0])
 
