@@ -11,13 +11,44 @@
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{subfigure}
+\usepackage{amsmath}
 
 % Document
 \begin{document}
 
+    \begin{titlepage}
+        \centering
+
+        {\scshape\LARGE FFHS \par}
+        \vspace{1cm}
+        {\scshape\Large Semesterprojekt Netzwerkanalyse \par}
+        \vspace{1.5cm}
+        {\huge\bfseries Globales Flugnetzwerk \par}
+        \vspace{2cm}
+        {\Large\itshape Samuel Blattner\par}
+
+        {\itshape 7. Semester\par}
+        \vfill
+        Dozentin\par
+        Ursula Deriu
+
+        \vfill
+
+        % Bottom of the page
+        {\large \today\par}
+    \end{titlepage}
+
+    \pagebreak
+    \setcounter{tocdepth}{2}
+    \tableofcontents
+
     \include{parts/introduction}
     \include{parts/data-mining}
     \include{parts/analysis}
+    \include{parts/appendix}
 
     \bibliography{main}
     \bibliographystyle{plain}

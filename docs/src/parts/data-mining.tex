@@ -1,13 +1,16 @@
-\section{Data Mining - Beschaffung der Daten}
+\section{Beschaffung der Daten}
+\label{sec:data-mining}
 
-Die Plattform Aviation Edge\footnote{https://aviation-edge.com} stellt einige APIs und dahinterliegende Datenbanken
+Die Plattform \textit{Aviation Edge}\footnote{https://aviation-edge.com} stellt einige APIs und dahinterliegende Datenbanken
 zur Verfügung, die Daten wie z.B. Standorte von Flughäfen sowie Routen von Airlines enthalten.
+Die Daten können für einen Monatspreis von 5\$ (und später 99\$) abgerufen werden (Stand: Dezember 2018).
+In den folgenden Unterabschnitten wird die Schnittstelle und das Datenformat kurz erläutert.
 
 \subsection{Flughäfen}
 \label{sec:airports}
 
-Als Hauptknoten des zu untersuchenden Netzwerkes gelten die Flughäfen. Diese können über die API wie folgt abgerufen
-werden:
+Als Hauptknoten des zu untersuchenden Netzwerkes gelten die Flughäfen.
+Diese können über die API über folgenden Aufruf der REST-Schnittstelle abgerufen werden:
 \begin{lstlisting}
     GET https://aviation-edge.com/v2/public/airportDatabase?key=[API_KEY]
 \end{lstlisting}
@@ -37,47 +40,23 @@ Die Serverantwort sieht wie folgt aus:
     ]
 
     \end{lstlisting}
-    \caption{Body der Server-Antwort der Airports-API}
+    \caption{Inhalt der Server-Antwort der Airports-API}
     \label{lst:AirportsAPIResponse}
 \end{figure}
 
 Die API listet insgesamt 10050 Flughäfen.
-Die Plattform ourairports.org bietet ebenfalls eine Liste mit weltweiten Flughäfen und -feldern an, enthält aber sogar
+Zum Vergleich bietet die Plattform \textit{ourairports.org} ebenfalls eine Liste mit weltweiten Flughäfen und -feldern an, enthält aber sogar
 rund 50000 Einträge.
-Um eine möglichst komplette Liste von Flughäfen zu erhalten, sollen diese beiden Listen kombiniert werden.
-Dabei wird die Aviation-Edge-Liste als primäre und die ourairports.org-Liste als sekundäre, ergänzende Liste herangezogen.
-
-
-\begin{figure}[ht]
-\centering
-\label{fig:tableAirportsCSV}
-\scriptsize{%
-    \begin{tabular}[ht]{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
-        id & ident & type &	name & latitude\_deg & longitude\_deg & elevation\_ft & continent & ... \\
-        \hline
-        4505 & LSZH & large\_airport & Zürich Airport & 47.464699 & 8.54917 & 1416 & EU & ...\\
-    \end{tabular}
-
-    \newline
-    \newline
-    \begin{tabular}[ht]{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
-        ... & iso\_country & iso\_region & municipality & scheduled\_service & gps\_code & iata\_code & ... \\
-        \hline
-        ... & CH & CH-ZH & Zurich & yes & LSZH & ZRH & ... \\
-    \end{tabular}
-}
-\caption{Auszug aus der Flughafen-Tabelle von ourairports.org}
-\end{figure}
-
+Nach einer ersten Einsicht in die Daten stellt sich allerdings heraus, dass die Vollständigkeit von Aviation Edge höher ist.
+Für diese Arbeit wird deshalb und um die Komplexität möglichst gering zu halten auf die Verwendung dieses zusätzlichen Datensatzes verzichtet.
 
 \subsection{Flugrouten}
 \label{sec:routes}
 
-Flugrouten von verschiedenen Fluggesellschaften können ebenfalls über Aviation-Edge abgerufen werden.
+Flugrouten von verschiedenen Fluggesellschaften können ebenfalls über \textit{Aviation-Edge} abgerufen werden.
 Die Flugrouten repräsentieren im Netzwerk die Kanten zwischen den Knoten (Flughäfen).
 Die API stellt die für den jeweiligen Tag gültigen bzw. registrierten Flugrouten bereit.
 Über den folgenden Aufruf liefert die API die Routen:
-
 \begin{lstlisting}
     GET https://aviation-edge.com/v2/public/routes?key=[API_KEY]&limit=1000000
 \end{lstlisting}
@@ -107,29 +86,36 @@ Die Daten haben die folgende Form:
         ]
     }
     \end{lstlisting}
-    \caption{Body der Server-Antwort der Airports-API}
+    \caption{Inhalt der Server-Antwort der Airports-API}
     \label{lst:routesAPIResponse}
 \end{figure}
+
+Für die Untersuchungen werden die Datensätze vom 8. Oktober 2018 (Flughäfen) bzw. vom 9. November 2018 (Flugverbindungen) verwendet.
 
 
 \subsection{Datenaufbereitung}
 \label{subsec:dataCleancing}
 
+In ihrer Rohfassung bilden die erwähnten Datensätze kein Netzwerk.
+In diesem Abschnitt wird kurz erläutert, wie die einzelnen Datensätze zu einem Netzwerk verbunden werden.
+Dazu kommen die Python-Bibliothek \textit{NetworkX} sowie das Programm \textit{Gephi} zum Einsatz.
+
 \subsubsection{Netzwerk-Dateiformat}
 \label{subsec:networkFileformat}
 Als nächstes müssen die Daten aus unterschiedlichen Quellen zu einem Netzwerk zusammengefügt werden.
 Eines der Datenformate mit den meisten Features ist das GEXF\footnote{https://gephi.org/users/supported-graph-formats/}.
-Die Spezifikation des Formats\footnote{https://gephi.org/gexf/format/} zeigt, dass es sich um ein herkömmliches XML-Format handelt.
-Glücklicherweise bietet das Python-Package \guillemotleft networkX\guillemotright bereits Funktionen an, um das
-GEFX-Format zu lesen und zu schreiben\footnote{https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.readwrite.gexf.write\_gexf.html}.
+Die Spezifikation des Formats zeigt, dass es sich um ein herkömmliches XML-Format handelt\footnote{https://gephi.org/gexf/format/}.
+Glücklicherweise bietet \textit{NetworkX} bereits Funktionen an, um das GEFX-Format zu lesen und zu schreiben\footnote{https://networkx.github.io/documentation/networkx-1.10/reference/generated/networkx.readwrite.gexf.write\_gexf.html}.
 
 
-\subsubsection{Script}
+\subsubsection{Script zur Erstellung des Netzwerks}
 Für das Kompilieren der Daten in das GEXF-Format wird ein Python-Script geschrieben.
 Dafür wird der Gesamt-Graph erst mit networkX modelliert und anschliessend in das Format exportiert.
 
 
-    \lstinputlisting[language=Python]{../../scripts/ffhs-na-semesterarbeit/create_airports_network.py}
+
+
+
 
 \subsubsection{Erste Betrachtung der Daten}
 Gephi ist nicht fähig, zusätzlich die weiteren Flughäfen anzuzeigen.

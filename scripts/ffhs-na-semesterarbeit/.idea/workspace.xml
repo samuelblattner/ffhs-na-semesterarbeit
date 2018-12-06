@@ -2,13 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="322af680-7ae7-415e-8f4f-dbd30aa2bae2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../docs/src/parts/sections/analysis.tex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/network_stats.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../APIs.paw" beforeDir="false" afterPath="$PROJECT_DIR$/../../APIs.paw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../docs/src/images/arr_dep_europe.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../docs/src/images/total_delay_20yrs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../docs/src/images/total_delay_5yrs.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../docs/src/parts/appendix.tex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/estimate_degree_exponent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/simulations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/simulations/delay_simulation_europe.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/statistics/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/statistics/network_stats.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../docs/src/main.bib" beforeDir="false" afterPath="$PROJECT_DIR$/../../docs/src/main.bib" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../docs/src/main.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../docs/src/main.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../docs/src/parts/sections/data-mining.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../docs/src/parts/sections/data-mining.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../docs/src/parts/analysis.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../docs/src/parts/analysis.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../docs/src/parts/data-mining.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../docs/src/parts/data-mining.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../docs/src/parts/introduction.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../docs/src/parts/introduction.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ffhs-na-semesterarbeit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ffhs-na-semesterarbeit.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_airports_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_airports_network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_airports_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/create_airports_network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/network_stats.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,42 +32,64 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/ffhs_na_semesterarbeit$Stats.coverage" NAME="Stats Coverage Results" MODIFIED="1539427892120" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ffhs_na_semesterarbeit$Estimate_Y.coverage" NAME="Estimate Y Coverage Results" MODIFIED="1543921103720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ffhs_na_semesterarbeit$Run_Simulation.coverage" NAME="Run Simulation Coverage Results" MODIFIED="1544095003021" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ffhs_na_semesterarbeit$Stats.coverage" NAME="Stats Coverage Results" MODIFIED="1544016927056" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ffhs_na_semesterarbeit$Unnamed.coverage" NAME="Create network Coverage Results" MODIFIED="1539181567281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ffhs_na_semesterarbeit$Create_network.coverage" NAME="Create network Coverage Results" MODIFIED="1541779224957" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ffhs_na_semesterarbeit$Create_network.coverage" NAME="Create network Coverage Results" MODIFIED="1543999729457" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-723292618">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
-          <entry key="project.open.time.0" value="4" />
-          <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.closed" value="13" />
+          <entry key="project.open.time.0" value="6" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.4" value="3" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="2" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gexf" value="1" />
-          <entry key="py" value="5" />
+          <entry key="p" value="1" />
+          <entry key="py" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="5" />
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="Python" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="Python Console" value="776" />
           <entry key="dummy" value="11" />
-          <entry key="py" value="5338" />
+          <entry key="py" value="29558" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="11" />
-          <entry key="Python" value="5338" />
+          <entry key="Python" value="30334" />
         </counts>
       </usages-collector>
     </session>
@@ -60,25 +97,67 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/network_stats.py">
+        <entry file="file://$PROJECT_DIR$/statistics/network_stats.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="86" selection-start-line="17" selection-start-column="86" selection-end-line="17" selection-end-column="86" />
+            <state relative-caret-position="645">
+              <caret line="43" selection-start-line="43" selection-end-line="53" selection-end-column="18" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
+                <marker date="1544016927050" expanded="true" signature="300:785" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/create_airports_network.py">
+        <entry file="file://$PROJECT_DIR$/simulations/delay_simulation_europe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+            <state relative-caret-position="1022">
+              <caret line="179" column="102" selection-start-line="179" selection-start-column="102" selection-end-line="179" selection-end-column="102" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+                <marker date="1544094963048" expanded="true" signature="1028:1029" ph="..." />
+                <marker date="1544094963048" expanded="true" signature="1323:1328" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="796">
+              <caret line="184" column="57" selection-start-line="184" selection-start-column="49" selection-end-line="184" selection-end-column="57" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+                <marker date="1544092325977" expanded="true" signature="2271:2720" ph="..." />
+                <marker date="1544092325977" expanded="true" signature="2804:4114" ph="..." />
+                <marker date="1544092325977" expanded="true" signature="9120:9121" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/generators/create_airports_network.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1039">
+              <caret line="140" lean-forward="true" selection-start-line="140" selection-end-line="140" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <marker date="1541779221452" expanded="true" signature="4510:4708" ph="..." />
+                <marker date="1544094766691" expanded="true" signature="1828:2027" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/estimate_degree_exponent.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="257">
+              <caret line="36" selection-start-line="36" selection-end-line="36" />
+              <folding>
+                <marker date="1543921101945" expanded="true" signature="886:887" ph="..." />
               </folding>
             </state>
           </provider>
@@ -86,13 +165,45 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>d</find>
-      <find>version</find>
       <find>from</find>
       <find>strptime</find>
       <find>gefx</find>
+      <find>current_time</find>
+      <find>minutes</find>
+      <find>europea</find>
+      <find>euro</find>
+      <find>duration</find>
+      <find>random_ne</find>
+      <find>delay_deca</find>
+      <find>delays</find>
+      <find>flight_index</find>
+      <find>parse</find>
+      <find>flight_duration_per</find>
+      <find>KLAX</find>
+      <find>LSZH</find>
+      <find>rotation</find>
+      <find>flight_dura</find>
+      <find>print</find>
+      <find>turn_around_du</find>
+      <find>initial</find>
+      <find>en_route_delay</find>
+      <find>load</find>
+      <find>calculate_airport</find>
+      <find>AIRPORT_LOAD</find>
+      <find>.parse</find>
+      <find>capacity</find>
+      <find>4.0</find>
+      <find>grow</find>
+      <find>european</find>
     </findStrings>
     <replaceStrings>
       <replace>to</replace>
@@ -104,8 +215,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/estimate_degree_exponent.py" />
         <option value="$PROJECT_DIR$/network_stats.py" />
         <option value="$PROJECT_DIR$/create_airports_network.py" />
+        <option value="$PROJECT_DIR$/delay_simulation_europe.py" />
+        <option value="$PROJECT_DIR$/utils.py" />
+        <option value="$PROJECT_DIR$/simulations/utils.py" />
+        <option value="$PROJECT_DIR$/statistics/network_stats.py" />
+        <option value="$PROJECT_DIR$/utils/utils.py" />
+        <option value="$PROJECT_DIR$/generators/create_airports_network.py" />
+        <option value="$PROJECT_DIR$/simulations/delay_simulation_europe.py" />
       </list>
     </option>
   </component>
@@ -116,10 +235,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="292" />
-    <option name="y" value="23" />
-    <option name="width" value="2137" />
-    <option name="height" value="1374" />
+    <option name="x" value="2583" />
+    <option name="width" value="2560" />
+    <option name="height" value="1417" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -133,6 +251,26 @@
             <path>
               <item name="ffhs-na-semesterarbeit" type="b2602c69:ProjectViewProjectNode" />
               <item name="ffhs-na-semesterarbeit" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ffhs-na-semesterarbeit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ffhs-na-semesterarbeit" type="462c0819:PsiDirectoryNode" />
+              <item name="generators" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ffhs-na-semesterarbeit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ffhs-na-semesterarbeit" type="462c0819:PsiDirectoryNode" />
+              <item name="simulations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ffhs-na-semesterarbeit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ffhs-na-semesterarbeit" type="462c0819:PsiDirectoryNode" />
+              <item name="statistics" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ffhs-na-semesterarbeit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ffhs-na-semesterarbeit" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -153,6 +291,17 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/statistics" />
+      <recent name="$PROJECT_DIR$/utils" />
+      <recent name="$PROJECT_DIR$/simulations" />
+      <recent name="$PROJECT_DIR$/generators" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -165,7 +314,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Create network">
+  <component name="RunManager" selected="Python.Run Simulation">
     <configuration name="Create network" type="PythonConfigurationType" factoryName="Python">
       <module name="ffhs-na-semesterarbeit" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -179,7 +328,51 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/create_airports_network.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/generators/create_airports_network.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Estimate Y" type="PythonConfigurationType" factoryName="Python">
+      <module name="ffhs-na-semesterarbeit" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/.virtualenvs/ffhs-na-semesterarbeit/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/estimate_degree_exponent.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Run Simulation" type="PythonConfigurationType" factoryName="Python">
+      <module name="ffhs-na-semesterarbeit" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/.virtualenvs/ffhs-na-semesterarbeit/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/simulations/delay_simulation_europe.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -201,7 +394,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/network_stats.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/statistics/network_stats.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -212,7 +405,9 @@
     </configuration>
     <list>
       <item itemvalue="Python.Create network" />
+      <item itemvalue="Python.Run Simulation" />
       <item itemvalue="Python.Stats" />
+      <item itemvalue="Python.Estimate Y" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -229,16 +424,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="292" y="23" width="2137" height="1374" extended-state="0" />
+    <frame x="2583" y="0" width="2560" height="1417" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.175179" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12589356" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3295626" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32683307" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.17056604" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39985162" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -247,13 +442,13 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32981133" />
-      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.22037736" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Remote Host" order="3" weight="0.32962668" />
-      <window_info anchor="right" id="SciView" order="4" weight="0.21842733" />
-      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="SciView" order="4" visible="true" weight="0.07664813" />
+      <window_info anchor="right" id="Database" order="5" weight="0.32962668" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,23 +479,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/network_stats.py">
+    <entry file="file://$USER_HOME$/.virtualenvs/ffhs-na-semesterarbeit/lib/python3.6/site-packages/networkx/classes/multidigraph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="86" selection-start-line="17" selection-start-column="86" selection-end-line="17" selection-end-column="86" />
+        <state relative-caret-position="323">
+          <caret line="552" column="13" lean-forward="true" selection-start-line="552" selection-start-column="13" selection-end-line="552" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulations/utils.py" />
+    <entry file="file://$USER_HOME$/.virtualenvs/ffhs-na-semesterarbeit/lib/python3.6/site-packages/dateutil/parser/_parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="220" column="53" lean-forward="true" selection-start-line="220" selection-start-column="53" selection-end-line="220" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/statistics/network_stats.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="43" selection-start-line="43" selection-end-line="53" selection-end-column="18" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+            <marker date="1544016927050" expanded="true" signature="300:785" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/create_airports_network.py">
+    <entry file="file://$PROJECT_DIR$/estimate_degree_exponent.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+        <state relative-caret-position="257">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <marker date="1543921101945" expanded="true" signature="886:887" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generators/create_airports_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1039">
+          <caret line="140" lean-forward="true" selection-start-line="140" selection-end-line="140" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1541779221452" expanded="true" signature="4510:4708" ph="..." />
+            <marker date="1544094766691" expanded="true" signature="1828:2027" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="796">
+          <caret line="184" column="57" selection-start-line="184" selection-start-column="49" selection-end-line="184" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+            <marker date="1544092325977" expanded="true" signature="2271:2720" ph="..." />
+            <marker date="1544092325977" expanded="true" signature="2804:4114" ph="..." />
+            <marker date="1544092325977" expanded="true" signature="9120:9121" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulations/delay_simulation_europe.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1022">
+          <caret line="179" column="102" selection-start-line="179" selection-start-column="102" selection-end-line="179" selection-end-column="102" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <marker date="1544094963048" expanded="true" signature="1028:1029" ph="..." />
+            <marker date="1544094963048" expanded="true" signature="1323:1328" ph="..." />
           </folding>
         </state>
       </provider>
