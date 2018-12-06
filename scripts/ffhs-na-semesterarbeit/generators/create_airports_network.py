@@ -161,10 +161,6 @@ for route in load_routes():
 nodes_to_delete = []
 for node in airport_network.nodes():
     if airport_network.node[node]['nameCountry'] not in EUROPEAN_COUNTRIES:
-        # for neighbor in airport_network.neighbors(node):
-        #     if airport_network.node[neighbor]['nameCountry'] in EUROPEAN_COUNTRIES:
-        #         break
-        # else:
         nodes_to_delete.append(node)
 
 for node_to_delete in nodes_to_delete:

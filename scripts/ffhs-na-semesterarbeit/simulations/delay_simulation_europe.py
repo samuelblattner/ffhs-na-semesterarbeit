@@ -12,6 +12,8 @@ from matplotlib import pyplot as plt
 europe_aviation_network: nx.MultiDiGraph = nx.read_gexf('network_europe.gexf')
 random_european_network = transform_to_random(europe_aviation_network)
 
+nx.write_gexf(random_european_network, 'random_europe_network.gexf')
+
 DEPARTURE_MINUTE_INDEX = {}
 ARRIVAL_MINUTE_INDEX = {}
 
@@ -26,7 +28,9 @@ turn_around_duration = 45
 
 
 networks = (
-    (europe_aviation_network, 'Natürliches Netzwerk'),
+    (europe_aviation_network, 'Natürliches Netzwerk, Hub', 'HUB'),
+    (europe_aviation_network.copy(), 'Natürliches Netzwerk, Direktverbindungen', 'NEIGHBOR'),
+    (europe_aviation_network.copy(), 'Natürliches Netzwerk, Zufällig', None),
     # (random_european_network, 'Zufallsnetzwerk')
 )
 
@@ -42,6 +46,30 @@ def initialize_simulation(network):
 
     for node in network.nodes():
         network.nodes[node]['delays'] = []
+
+
+def reduce_random(network: nx.MultiDiGraph):
+
+    removables = []
+    remove_percent = 0.8
+
+    # Reduce Nodes
+    # for node in network.nodes():
+    #     if random() > remove_percent:
+    #         continue
+    #     removables.append(node)
+    #
+    # for removable in removables:
+    #     network.remove_node(removable)
+
+    # Reduce edges
+    for f, t, k in network.edges(keys=True):
+        if random() > remove_percent:
+            continue
+        removables.append((f, t, k))
+
+    for f, t, k in removables:
+        network.remove_edge(f, t, k)
 
 
 def calculate_airport_loads_for_time(time):
@@ -172,14 +200,11 @@ def calculate_european_delay(network):
 delay_tables = [None] * len(networks)
 for n, network_tuple in enumerate(networks):
 
-    network, network_name = network_tuple
+    network, network_name, pref_attach = network_tuple
     initialize_simulation(network)
+    reduce_random(network)
 
-    print('numer before: ', len(network.edges))
-
-    grow_traffic_by_x_years(network, 10, connection_growth_per_year, flight_duration_per_km, 'NEIGHBOR')
-
-    print('numer after: ', len(network.edges))
+    grow_traffic_by_x_years(network, 10, connection_growth_per_year, flight_duration_per_km, pref_attach)
 
     sys.stdout.write('\rCreating departures/arrivals index...')
     DEPARTURE_MINUTE_INDEX, ARRIVAL_MINUTE_INDEX = create_flight_departures_arrivals_index(network)
@@ -192,9 +217,6 @@ for n, network_tuple in enumerate(networks):
     load_table = []
     max_delay = 0
 
-    load_zh = AIRPORT_LOAD_INDEX['9908']
-    cap_zh = AIRPORT_CAPACITY_INDEX['9908']
-
     while True:
         try:
             do_simulation_step(network)
@@ -204,16 +226,13 @@ for n, network_tuple in enumerate(networks):
             max_delay = max(max_delay, total_delay)
             delay_tables[n].append(total_delay)
 
-            cap_table.append(cap_zh)
+            # cap_table.append(cap_zh)
             calculate_airport_loads_for_time(current_time)
-            load_table.append(AIRPORT_LOAD_INDEX.get('9908', 0))
+            # load_table.append(AIRPORT_LOAD_INDEX.get('9908', 0))
 
         except StopIteration:
             print('Simulation complete.')
             break
-
-    print('max')
-    print(max_delay)
 
 fig = plt.figure()
 plt.clf()
@@ -230,13 +249,3 @@ for delay_table, network in zip(delay_tables, networks):
 
 fig = plt.figure()
 plt.clf()
-#
-# plt.plot(range(24 * 60), cap_table, label='Kapazität LSZH')
-# plt.plot(range(24 * 60), load_table, label='Last LSZH')
-#
-# plt.xlabel('Minute UTC')
-# plt.ylabel('Anzahl Flugbewegungen')
-#
-# pp = PdfPages('cap_load_lszh.pdf')
-# fig.savefig(pp, format='pdf')
-# pp.close()

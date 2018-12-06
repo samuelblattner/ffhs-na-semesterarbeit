@@ -114,7 +114,7 @@ def calculate_hub_attachment_likelihood(network: nx.MultiDiGraph, from_airport, 
 
 def calculate_hub_neighbor_attachment_likelihood(network, from_airport, to_airport):
 
-    p = 0.3
+    p = 0.2
 
     # Find hubs that connect from and to airports
     from_neighbors = set([t for f, t, k in network.out_edges(from_airport, keys=True)])
@@ -141,12 +141,24 @@ def calculate_hub_neighbor_attachment_likelihood(network, from_airport, to_airpo
 
     strength, strongest_hub = sorted(all_to_hub_strengths, key=lambda hn: hn[0], reverse=True)[0]
 
-    existing_direct_routes = network.get_edge_data(from_airport, to_airport)
-    existing_direct_routes = len(existing_direct_routes) if existing_direct_routes else 0
+    existing_direct_routes1 = network.get_edge_data(from_airport, to_airport)
+    existing_direct_routes1 = len(existing_direct_routes1) if existing_direct_routes1 else 0
 
-    neighbor_connectivity = (1-p) * (1 / (1 + existing_direct_routes**2)) * (strength / sum([s[0] for s in all_to_hub_strengths]))
+    existing_direct_routes2 = network.get_edge_data(to_airport, from_airport)
+    existing_direct_routes2 = len(existing_direct_routes2) if existing_direct_routes2 else 0
+
+    existing_direct_routes = existing_direct_routes1 + existing_direct_routes2
+
+    neighbor_connectivity = (1-p) * (1 / ((1 + existing_direct_routes)**5)) * (strength / sum([s[0] for s in all_to_hub_strengths]))
 
     return random_connectivity + neighbor_connectivity
+
+
+def calculate_non_hub_connectivity(network: nx.MultiDiGraph, from_airport, to_airport):
+
+    p = 0.2
+
+    return p * 1/network.number_of_nodes() + (1-p) * 1/((network.degree(to_airport) + 1)**2)
 
 
 def grow_traffic_by_x_years(network: nx.MultiDiGraph, years, growth_rate, duration_per_km, preferential_attachment=None):
@@ -184,6 +196,13 @@ def grow_traffic_by_x_years(network: nx.MultiDiGraph, years, growth_rate, durati
 
                 elif preferential_attachment == 'NEIGHBOR':
                     p = calculate_hub_neighbor_attachment_likelihood(network, from_airport, to_airport)
+                    # sys.stdout.write('\rP: {} '.format(p))
+                    if random() > p:
+                        continue
+
+                elif preferential_attachment == 'NONHUB':
+                    p = calculate_non_hub_connectivity(network, from_airport, to_airport)
+                    # sys.stdout.write('\rP: {} '.format(p))
                     if random() > p:
                         continue
 

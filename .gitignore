@@ -87,3 +87,4 @@ fabric.properties
 data/
 
 *.pyc
+*.aux

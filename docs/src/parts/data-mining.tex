@@ -111,36 +111,31 @@ Glücklicherweise bietet \textit{NetworkX} bereits Funktionen an, um das GEFX-Fo
 \subsubsection{Script zur Erstellung des Netzwerks}
 Für das Kompilieren der Daten in das GEXF-Format wird ein Python-Script geschrieben.
 Dafür wird der Gesamt-Graph erst mit networkX modelliert und anschliessend in das Format exportiert.
+Das komplette Script ist auf Github einsehbar\footnote{https://github.com/samuelblattner/ffhs-na-semesterarbeit/blob/master/scripts/ffhs-na-semesterarbeit/generators/create\_airports\_network.py}.
+Mit den beiden Funktionen \textit{load\_airports()} und \textit{load\_routes()} werden die beiden Roh-Datensätze geladen.
+Anschliessend wird ein neues NetworkX-Netzwerk erstellt und sämtliche Flughäfen hinzugefügt.
+Schliesslich werden all diejenigen Routen eingefügt, die einen Abflughafen und einen Ankunftsflughafen enthalten, die
+dem Netzwerk bereits bekannt sind.
 
-
-
-
+Ein weiteres wichtiges Detail anschliessend hinzugefügt: Die Abflug- sowie Ankunftszeit in Coordinated Universal Time (UTC).
+Erst die normalisierten Abflug und Ankunftszeiten machen einen Vergleich und die Simulation der weltweiten Flugbewegungen möglich.
 
 
 \subsubsection{Erste Betrachtung der Daten}
-Gephi ist nicht fähig, zusätzlich die weiteren Flughäfen anzuzeigen.
-Deshalb soll nur mit den primären Datensätzen von Aviation-Edge gearbeitet werden.
 Ein erstes Laden des Netzwerks in Gephi und die Darstellung mit dem \guillemotleft Geo Layout \guillemotright zeigt
-schön die Umrisse der Kontinente (siehe Abb. \ref{fig:firstLoadGephi}).
+deutlich sichtbar die Umrisse der Kontinente (siehe Abb. \ref{fig:firstLoadGephi}).
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\linewidth]{images/first-load-gephi.png}
-    \caption{Erstes Laden der Flughäfen.}
-    \label{fig:firstLoadGephi}
+    \subfigure[Flughäfen zeichnen die Kontinente\label{fig:firstLoadGephi}]{\includegraphics[width=\linewidth]{images/first-load-gephi.png}}
+    \subfigure[Flugrouten geben erste Hinweise auf Cluster\label{fig:firstLoadGephiRoutes}]{\includegraphics[width=\linewidth]{images/first-load-gephi-routes.png}}
 \end{figure}
 
 Werden die Routen dazugeladen ergibt sich das Bild in Abb. \ref{fig:firstLoadGephiRoutes}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{images/first-load-gephi-routes.png}
-    \caption{Erstes Laden der Flughäfen.}
-    \label{fig:firstLoadGephiRoutes}
-\end{figure}
-
-Bei der ersten Überprüfung fällt auf, dass sich unter den Flughäfen einige Bahnhöfe verstecken (siehe Abb. \ref{fig:railwayStations}).
+Bei der ersten Überprüfung fällt auf, dass sich unter den Flughäfen einige Bahnhöfe verstecken.
 Es ist nicht bekannt, weshalb diese Datensätze vorhanden sind.
 Auch Aviation Edge schreibt nichts darüber.
 Damit das Netzwerk möglichst nur Flughäfen und -felder enthält, werden die Bahnhöfe im Script entfernt.
+
 

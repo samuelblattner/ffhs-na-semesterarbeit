@@ -52,7 +52,7 @@ for idx, Kmin_class in enumerate(degree_classes):
     D.setdefault(Kmin_class, kstest(degree_data_subset, lambda k: 1 - (zeta(gamma, k) / zeta(gamma, Kmin_class))))
 
 
-table_l = sorted(filter(lambda test_tuple: test_tuple[1].pvalue > 0.05, D.items()), key=lambda test_tuple: test_tuple[1].statistic)
+table_l = sorted(filter(lambda test_tuple: test_tuple[1].pvalue > 0.01, D.items()), key=lambda test_tuple: test_tuple[1].statistic)
 table = sorted(D.items(), key=lambda test_tuple: test_tuple[1].statistic)
 
 best_gamma = estimate_gamma(table_l[0][0], degree_data[degree_data.index(table_l[0][0]):])

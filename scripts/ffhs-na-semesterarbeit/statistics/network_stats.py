@@ -1,6 +1,5 @@
 import networkx as nx
 from matplotlib.backends.backend_pdf import PdfPages
-from networkx import Graph
 import matplotlib.pyplot as plt
 
 from utils.utils import create_flight_departures_arrivals_index, EUROPEAN_COUNTRIES
@@ -12,12 +11,20 @@ def print_simple_stats():
     in_degrees = list(dict(graph.in_degree).values())
     out_degrees = list(dict(graph.out_degree).values())
 
-    print('<k>: {}'.format(sum(degrees) / graph.number_of_nodes()))
-    print('<k_in>: {}'.format(sum(in_degrees) / graph.number_of_nodes()))
-    print('<k_out>: {}'.format(sum(out_degrees) / graph.number_of_nodes()))
+    avg_k = sum(degrees) / graph.number_of_nodes()
+    avg_k_in = sum(in_degrees) / graph.number_of_nodes()
+    avg_k_out = sum(out_degrees) / graph.number_of_nodes()
+
+    avg_k2 = sum([deg ** 2 for deg in degrees]) / graph.number_of_nodes()
+    perc_f = 1 - 1/((avg_k2 / avg_k) - 1)
+
+    print('<k>: {}'.format(avg_k))
+    print('<k_in>: {}'.format(avg_k_in))
+    print('<k_out>: {}'.format(avg_k_out))
 
     print()
-    print('<k^2>: {}'.format(sum([deg ** 2 for deg in degrees]) / graph.number_of_nodes()))
+    print('<k^2>: {}'.format(avg_k2))
+    print('Percolation crit: {}'.format(perc_f))
 
 
 def plot_degree_hist(output=None):
@@ -53,6 +60,16 @@ def plot_dep_arr_hist(countries_only=None, output=None):
         fig.savefig(pp, format='pdf')
         pp.close()
 
+def list_betweenness_ranks():
 
-plot_dep_arr_hist('arr_dep_world.pdf')
-plot_dep_arr_hist(EUROPEAN_COUNTRIES, 'arr_dep_europe.pdf')
+    cent = dict(nx.betweenness_centrality(graph))
+    most_central = sorted(cent.items(), key=lambda k: k[1], reverse=True)[:50]
+
+    for m in most_central:
+        print(graph.nodes[m[0]].get('codeIcaoAirport', '-'), m[1])
+
+# plot_dep_arr_hist('arr_dep_world.pdf')
+# plot_dep_arr_hist(EUROPEAN_COUNTRIES, 'arr_dep_europe.pdf')
+
+list_betweenness_ranks()
+# print_simple_stats()

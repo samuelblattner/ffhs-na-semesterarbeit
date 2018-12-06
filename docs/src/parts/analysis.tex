@@ -14,71 +14,91 @@ Das Histogramm der Knotengrade deutet sehr stark auf eine exponentielle Verteilu
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{images/degree-histogram.pdf}
-    \caption{Caption}
+    \caption{Histogramm der Grade.}
     \label{fig:degreeHistogram}
 \end{figure}
 
 \subsection{Beschaffenheit}
 
-\subsubsection{Übersicht}
-
 Die Daten basieren auf dem Datensatz für die Flughäfen vom 8. Oktober 2018 sowie Flugverbindungen vom 9. November 2018.
+\vspace{2em}
 
-
-\begin{tabular}{l|l}
-    Durchschnittler Grad $ \langle k\rangle $ & 38.215\\ \hline
-    Zweites Moment $ \langle k^{2}\rangle $ & 35676.88 \\ \hline
-    Exponent $ \gamma $ & 2.24 \\ \hline
-\end{tabular}
+\begin{itemize}
+    \item Anzahl Flughäfen: 9448
+    \item Anzahl Routen: 180529
+    \item Netzwerkdurchmesser: 10
+    \item Durchschnittliche Pfadlänge: 3.82
+    \item Durchschnittler Grad $\langle k\rangle$: 38.215
+    \item Zweites Moment $\langle k^{2}\rangle$: 35676.88
+    \item Exponent $\gamma$ 2.24
+\end{itemize}
 
 \subsubsection{Annäherung \gamma-Exponent}
-Gemäss des Algorithmus in Network Science \footnote{} soll der Gamma-Exponent für das Flugroutennetzwerk angenähert werden.
+Der grosse Unterschied zwischen $\langle k \rangle \text{sowie} \langle k^{2} \rangle$ deutet auf eine starke Streuung der
+Grade und somit auf ein skalenfreies Netzwerk hin.
+Gemäss des Algorithmus in Network Science\cite{barabasi-network-science} soll versucht werden, den Gamma-Exponent für das Flugroutennetzwerk in Annahme einer Potenzverteilung anzunähern.
 
 Zur Schätzung des $ \gamma$- Exponenten wird die Maximum Likelihood Methode wie in \cite{barabasi-network-science} und näher
 in \cite{clauset-power-law-distribution} beschrieben.
 
 $$ \gamma = 1 + N\Bigg[\sum_{i=1}^{N}ln \frac{k_{i}}{K_{min} - \frac{1}{2}}\Bigg]^{-1} $$
 
+Das anschliessende Fitting mittels kumulierter Verteilungsfunktion siedelt den $\gamma$-Exponenten bei 2.24 an.
+In Abbildung \ref{fig:degreeDist} wird die empirische Verteilung sowie die Verteilung gemäss Exponenten gezeigt.
+In der Log-Skala ist gut sichtbar, dass es sich bei der Verteilung nicht um eine reine Potenz-Verteilung handeln kann,
+da sie eine höhere \guillemotleft Sättigung\guillemotright im unteren Gradbereich aufweist (\guillemotleft Low Degree Saturation\guillemotright).
+Zudem ist die starke Streuung der Verteilung bei höheren Graden deutlich sichtbar.
+Weshalb die Verteilung nach Gamma-Exponent ausserhalb der empirischen Verteilung liegt ist unklar, womöglich ist dies aber auf einen
+Berechnungsfehler zurückzuführen.
 
-\subsubsection{Berechnung }
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/degree-distribution.pdf}
+    \caption{Gradverteilung auf der Log-Skala}
+    \label{fig:degreeDist}
+\end{figure}
 
-
-\section{Erste Forschungsfragen}
-\label{sub:scientific-questions}
-
-\begin{enumerate}
-    \item Welches sind die wichtigsten Flughäfen?
-    \item Wie korreliert die Erdumrundungszeit mit der Robustheit des Flugnetzwerkes?
-    \item Wie ist die Beschaffenheit des globalen Flughafennetzwerkes im Bezug auf die Robustheit?
-\end{enumerate}
-
-\subsection{Ausarbeitung}
-\label{subsec:scientific-question-analysis}
 
 \subsubsection{Welches sind die wichtigsten Flughäfen?}
-Begründung: Wichtig für die Funktionstüchtigkeit des Netzwerks
+Wie wird ein Flughafen als wichtig klassifiziert?
+Wichtig ist ein Flughafen sicher dann, wenn er einerseits ein Hub ist, also viele Verbindungen zusammenführt und wieder verteilt.
+Ausserdem ist ein Flughafen wichtig, wenn er als Brücke zwischen mehreren Teilnetzen agiert.
+Diese Eigenschaft ist definiert in der sog. \guillemotleft Betweenness Centrality\guillemotright.
+Je mehr kürzeste Pfade über einen bestimmten Flughafen führen, desto höher ist dieser Zentralitätswert.
+
+\begin{table}
+    \centering
+
+\begin{tabular}{l l c r}
+ICAO & Stadt & Betweenness & k \\ \hline
+EDDF & Frankfurt & 0.007061 & 2359 \\
+OMDB & Dubai & 0.007035 & 2092 \\
+LFPG & Paris & 0.007003 & 2658 \\
+LTBA & Istanbul & 0.006689 & 2044 \\
+ZBAA & Peking & 0.006433 & 2156 \\
+KLAX & Los Angeles & 0.005778 & 2764 \\
+PANC & Anchorage & 0.005543 & 389 \\
+KORD & Chicago & 0.004787 & 3438 \\
+CYYZ & Toronto & 0.004419 & 2299 \\
+YSSY & Sydney & 0.004110 & 1445 \\
+
+\end{tabular}
+
+    \caption{Flughäfen mit den höchsten Betweenness Zentralitätsmassen}
+    \label{tbl:between}
+\end{table}
 
 \subsubsection{Wie ist die Beschaffenheit des globalen Flughafennetzwerkes im Bezug auf die Robustheit?}
-Begründung: Im Flugnetz finden täglich bis zu 200000 Flugbewegungen statt \footnote{http://www.reisereporter.de/artikel/4533-rekord-tag-luftfahrtgeschichte-flugzeuge-und-fluege-pro-tag-weltweit-flug-tracker-flightradar-misst-verkehrsreichsten-tag}.
+Begründung: Im Flugnetz finden täglich bis zu 200000 Flugbewegungen statt\footnote{http://www.reisereporter.de/artikel/4533-rekord-tag-luftfahrtgeschichte-flugzeuge-und-fluege-pro-tag-weltweit-flug-tracker-flightradar-misst-verkehrsreichsten-tag}.
 Für diese enorme Zahl finden erstaunlich wenige Störungen und Ausfälle statt.
 Aber wie gut ist das Netzwerk aufgebaut?
 Wieviele Flughäfen müssten ausfallen, damit das Gesamtnetz in einzelne isolierte Unternetze zerfällt und damit der weltweite Luftverkehr zum erliegen kommt?
-Robustheit, relevanz? Heisst: Wie lange hängen alle noch aktiven Flughäfen zusammen?
 
-Random Failuers: f_c = 1 - \frac{1}{\frac{\langle k^{2}\rangle}{\langle k\rangle} - 1} = 0.775533
+Der kritische Anteil an geschlossenen Flughäfen, der nötig ist, damit das Gesamtnetzwerk in mehrere kleinere, nicht zusammenhängende Netzwerke zerfällt lässt sich wie folgt berechnen:
 
-\subsubsection{Welches ist der Zeitgünstigste Weg, um von Zürich nach Zürich einmal um die Welt zu fliegen?}
-Begründung: Aviatik hat jeden Punkt auf der Erde in wenigen Stunden erreichbar gemacht. Aber wie lange dauert eine komplette Erdumrundung konkret?
+$$ f_c = 1 - \frac{1}{\frac{\langle k^{2}\rangle}{\langle k\rangle} - 1} = 0.9989 $$
 
-\section{Literatur-Recherche}
-\label{subsec:literature-research}
-
-Robustheit
-
-\guillemotleft Worldwide aviation network vulnerability analysis: a complex network approach \guillemotright
-https://link-springer-com.proxy2.biblio.supsi.ch/content/pdf/10.1007%2Fs40844-015-0025-y.pdf
-
-Als besseres Mass für die Robustheit gilt die die Auswirkung auf die Effizienz, wenn bestimmte Flughäfen aussteigen.
+Vom Flugnetzwerk müssten also über 99\% der Flughäfen zufällig geschlossen werden, bevor das Netzwerk in mehrere kleinere Netzwerke zerfällt.
 
 
 \subsection{Verspätungen}
@@ -88,15 +108,8 @@ Im selben Artikel werden die Auswirkungen dieses immer dichter werdenden Verbind
 Ursachen für Verspätungen sind z.B. Streiks, Wetterbedingungen, Verkehrsüberlastungen, aber auch ineffiziente Arbeitsabläufe während des sog. \guillemotleft Turnarounds\guillemotright,
 die Zeit, während der das Flugzeug geparkt ist und entladen, betankt und wieder beladen bzw. für den nächsten Flug vorbereitet wird.
 
-In diesem Abschnitt soll in Anlehnung an zwei relevanten wissenschaftlichen Artikeln ein Modell erarbeitet werden,
+In diesem Abschnitt soll in Anlehnung an zwei relevante wissenschaftliche Artikel ein Modell erarbeitet werden,
 um die \guillemotleft Anfälligkeit\guillemotright des europäischen Flugnetzwerkes auf sich kumulierende Verspätungen zu untersuchen.
-
-Dabei soll versucht werden, folgende zwei Fragestellungen zu beantworten:
-
-\begin{enumeration}
-    \item Wie verhält sich ein bestimmter Verspätungs-Grenzwert, ab dem das System komplett zum erliegen kommt?
-    \item Wie verhält sich die Netzwerk-Gesamtverspätung an einem Tag in Abhängigkeit der Netzwerkbeschaffenheit?
-\end{enumeration}
 
 \subsubsection{Modell}
 \label{subsubsec:model}
@@ -155,27 +168,11 @@ Im zuvor erwähnten NZZ-Artikel wird von einer Wachstumsrate der Flüge von jäh
 In einer weiteren Simulation wird das empirische Netzwerk einem entsprechenden Wachstum für fünf, zehn, 15 beziehungsweise 20 Jahre ausgesetzt.
 Das Netzwerk wird dabei jeweils um die Zeit von 5:00 Uhr morgens bis 20:00 Uhr abends mit dem Wachstum entsprechenden zusätzlichen Verbindungen ausgestattet.
 
-5:
-112437
-136796
-27998.155082216195
-
-10:
-112437
-166434
-max 33819.02327609417
-
-15:
-112437
-202491
-max 40147.514825236954
-
-
-20:
-112437
-246362
-max 48335.76
-
+Abbildung \ref{fig:sim-after-growth} zeigt die Simulationen nach verschiedenen Wachstumsphasen.
+Interessant ist dabei, dass sich die allgemeine Erscheinung der Kurve nicht verändert.
+Allenfalls lässt sich eine Verkürzung der Plateaus zwischen 900 und 1200 Minuten feststellen.
+Dies könnte darin begründet sein, dass sich Verspätungen aufgrund der höheren Flugbewegungsfrequenz langsamer abbauen
+können.
 
 Wie verhält sich die Verspätungsentwicklung in einem zufälligen Netzwerk?
 Zu diesem Zweck wird das empirische Flugnetzwerk in ein zufälliges Netzwerk transformiert.
@@ -209,10 +206,12 @@ weniger Anschlussflüge von einem verspäteten Flug abhängig sind.
 
 \begin{figure}
     \centering
-    \subfigure{\includegraphics[width=0.45\linewidth]{images/total_delay_5yrs.pdf}}
-    \subfigure{\includegraphics[width=0.45\linewidth]{images/total_delay_10yrs.pdf}}
-    \subfigure{\includegraphics[width=0.45\linewidth]{images/total_delay_15yrs.pdf}}
-    \subfigure{\includegraphics[width=0.45\linewidth]{images/total_delay_20yrs.pdf}}
+    \subfigure[Simulation nach Wachstum um 5 Jahre]{\includegraphics[width=0.45\linewidth]{images/total_delay_5yrs.pdf}}
+    \subfigure[Simulation nach Wachstum um 10 Jahre]{\includegraphics[width=0.45\linewidth]{images/total_delay_10yrs.pdf}}
+    \subfigure[Simulation nach Wachstum um 15 Jahre]{\includegraphics[width=0.45\linewidth]{images/total_delay_15yrs.pdf}}
+    \subfigure[Simulation nach Wachstum um 20 Jahre]{\includegraphics[width=0.45\linewidth]{images/total_delay_20yrs.pdf}}
+    \caption{Simulationen nach Wachstum des Netzwerks}
+    \label{fig:sim-after-growth}
 \end{figure}
 
 \begin{figure}
@@ -235,7 +234,7 @@ Um dies zu untersuchen, soll die Simulation auf zwei Arten angepasst werden:
     \item Das Wachstum des Netzwerks über 10 Jahre bevorzugt Flughafenpaare, zwischen denen bereits eine starke Verbindung besteht, stellt stattdessen jedoch Direktverbindungen zwischen einem der beiden Flughäfen und einem direkten Nachbarn des anderen Flughafen her.
 \end{enumerate}
 
-Analog zum Barabási-Albert Modell wird die Verbindungswahrscheinlichkeit für Fall 1 wie folgt beschrieben:
+Analog zum \guillemotleft Copying Model\guillemotright wird die Verbindungswahrscheinlichkeit für Fall 1 wie folgt beschrieben:
 
 \begin{equation}
     \label{eq:growth-model-1}
@@ -260,19 +259,6 @@ oder nur wenige Direktverbindungen bestehen (siehe Abb. \ref{fig:pref-attach-nei
     \end{cases}
 \end{equation}
 
-Gleichung \ref{eq:growth-model-2} erhöht die Verbindungswahrscheinlichkeit nur dann, wenn zwischen den Hub-Flughafen $j$ und dessen Nachbar $n$ bereits mindestens eine Verbindung besteht.
-Ist dies nicht der Fall, ist eine Direktverbindung von $i$ nach $n$ nicht sinnvoll, weil Passagiere bereits heute nicht von $i$ nach $n$ reisen.
-Die Wahrscheinlichkeit, dass $i$ eine Verbindung nach $n$ herstellt unterliegt dann also einem gleichmässigen Zufall.
-
-Besteht allerdings bereits mindestens eine Verbindung zwischen Hub und Nachbar, so ist es umso wahrscheinlicher, dass eine Direktverbindung von $i$ nach $n$ aufgebaut wird,
-je weniger Direktverbindungen zwischen diesen Flughäfen bereits bestehen ($ \frac{1}{1 + w_{in}^{2}}$).
-
-Dies soll das Bestreben des Wachstums widerspiegeln, Lasten von Hubs abzuwenden und stattdessen auf noch wenig entwickelte Direktrouten zu verteilen.
-
-
-
-
-
 \begin{figure}
     \centering
     \subfigure[\label{fig:pref-attach-hubs}]{\includegraphics[width=0.30\linewidth]{images/growth-model-1.pdf}} \hspace{4em}
@@ -282,42 +268,45 @@ Dies soll das Bestreben des Wachstums widerspiegeln, Lasten von Hubs abzuwenden 
 \end{figure}
 
 
+Gleichung \ref{eq:growth-model-2} erhöht die Verbindungswahrscheinlichkeit nur dann, wenn zwischen den Hub-Flughafen $j$ und dessen Nachbar $n$ bereits mindestens eine Verbindung besteht.
+Ist dies nicht der Fall, ist eine Direktverbindung von $i$ nach $n$ nicht sinnvoll, weil Passagiere bereits heute nicht von $i$ nach $n$ reisen.
+Die Wahrscheinlichkeit, dass $i$ eine Verbindung nach $n$ herstellt unterliegt dann also einem gleichmässigen Zufall.
 
-\subsubsection{Wie verhält sich die Netzwerk-Gesamtverspätung an einem Tag in Abhängigkeit der Netzwerkbeschaffenheit?}
-\label{subsubsec:question-1}
+Besteht allerdings bereits mindestens eine Verbindung zwischen Hub und Nachbar, so ist es umso wahrscheinlicher, dass eine Direktverbindung von $i$ nach $n$ aufgebaut wird,
+je weniger Direktverbindungen zwischen diesen Flughäfen bereits bestehen ($ \frac{1}{1 + w_{in}^{2}}$).
 
-Konkret formuliert lautet die Frage: \guillemotleft Entwickelt sich die Gesamtverspätung anders in einem Zufallsnetzwerk als
-in einem natürlichen Netzwerk? \guillemotright bzw. \guillemotleft Wäre eine gleichmässigere Verbindungsverteilung
-vorteilhafter für die Anfälligkeit für Verspätungskaskaden? \guillemotright
+Dies soll das Bestreben des Wachstums widerspiegeln, Lasten von Hubs abzuwenden und stattdessen auf noch wenig entwickelte Direktrouten zu verteilen.
+
+Abbildung \ref{fig:delay} zeigt die Simulationen nun im Vergleich.
+Auffällig ist wiederum, dass sich die allgemeine Charakteristik der täglichen Entwicklung nicht merklich verändert.
+Allerdings reduziert sich die maximale Verspätung auf rund 30000 Minuten gegenüber einer zufälligen Routenentwicklung über 10 Jahre.
+Nach dem Wachstumsmodell 1, bei dem neue Verbindungen fokussiert auf bereits starke Verbindungen entstehen, erhöht sich die maximale Verspätung hingegen auf rund 40000 Minuten.
+Um die Simulation in nützlicher Frist mehrfach zu wiederholen, wurden das Netzwerk zufällig in der Kantenzahl reduziert.
+In der zusammenfassenden Abbildung \ref{fig:delay-all} ist nach mehreren Simulationsgängen stets zu erkennen, dass das Modell für die Direktverbindungen tendentiell zu geringeren Gesamtverspätungen führt.
+
+\begin{figure}
+    \centering
+    \subfigure[Simulation nach Wachstum um 10 Jahre mit Wachstumsmodell 2]{\includegraphics[width=0.45\linewidth]{images/total_delay_neighbor10yrs.pdf}}
+    \subfigure[Simulation nach Wachstum um 10 Jahre mit zufälligem Wachstum]{\includegraphics[width=0.45\linewidth]{images/total_delay_10yrs.pdf}}
+    \subfigure[Simulation nach Wachstum um 10 Jahre mit Wachstumsmodell 1]{\includegraphics[width=0.45\linewidth]{images/total_delay_hub_10yrs.pdf}}
+    \caption{Simulationen nach Wachstum des Netzwerks}
+    \label{fig:delay}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/total_delay_all.pdf}
+    \caption{Verspätung nach Wachstum über 10 Jahre}
+    \label{fig:delay-all}
+\end{figure}
 
 
-
-\subsubsection{Wie verhält sich ein bestimmter Verspätungs-Grenzwert, ab dem das System komplett zum erliegen kommt?}
-
-Ab wann gilt, dass das komplette System zum erliegen kommt?
-
-
-
-\guillemotleft Systemic delay propagation in the US airport network \guillemotright
-https://www.nature.com/articles/srep01159
-https://www.nzz.ch/wirtschaft/wieso-in-europa-viel-zu-viele-fluege-verspaetet-sind-ld.1410842
-http://www.airliners.de/flugzeug-stehzeug-wie-bodenzeit-jets-jenny-jetstream-50/34225
-https://www.boeing.com/commercial/aeromagazine/aero_01/textonly/t01txt.html
-Sagt düstere Zukunft voraus in nächster Dekade, da System möglicherweise überlastet.
-Hauptursache für Verbreitung von Verspätungen sind Anschlussflüge.
-Verspätungen ballen sich meist in Clustern.
-file:///Users/samuelblattner/Downloads/ACI%20EUROPE%20Airport%20Industry%20Connectivity%20Report%202017.pdf
-=> Berechnung Ausbreitung mit Epidemie-Modellen?
-
-
-\subsection{Weitere Forschungsfragen}
-\begin{enumerate}
-    \item Wie wichtig sind ausgewählte Flughäfen für die Effizienz des Gesamtnetzwerkes?
-    \item Wie empfindlich ist das europäische Netzwerk auf Verspätungen?
-    \item Wie wirkt sicht ein Zuwachs von x \% auf die Empfindlichkeit aus?
-\end{enumerate}
-
-\subsubsection{Wie wichtig sind ausgewählte Flughäfen für die Effizienz des Gesamtnetzwerkes?}
-Begründung: Ist das Vorhandensein eines Flughafens Fluch oder Segen? Wäre die Effizienz des Gesamtnetzerks rebuster, wenn der Flughafen gar nicht existieren würde?
-
-\subsubsection{}
+\subsection{Ausblick}
+Diese Arbeit berührt einige Überlegungen zum weltweiten Flugnetzwerk und insbesondere zum europäischen Flugnetzwerk nur ansatzweise.
+Als nächsten Schritt müsste das Simulationsmodell validiert werden, um die Richtigkeit der Prognosen zu überprüfen und verbessern zu können.
+Anschliessend wäre die Weiterentwicklung der Wachstumsmodelle interessant.
+In dieser Arbeit werden diese lediglich unter dem Gesichtspunkt der Verspätungsentwicklung betrachtet.
+In diesem Zusammenhang wäre es wichtig, diese Resultate anderen Charakteristiken des Netzwerks gegenüberzustellen.
+Beispielsweise wurde die Robustheit nur kurz angesprochen.
+Daher wäre es aufschlussreich, die Entwicklung der Verspätungen bei verschiedenen Netzwerkbeschaffenheiten beispielsweise der Robustheit bei
+Totalausfällen oder der Kostenentwicklung für den Ausbau eines bestimmten Netzwerks gegenüberzustellen.
